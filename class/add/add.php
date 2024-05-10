@@ -107,9 +107,9 @@
 			$sessionid = $_SESSION['admin_id'];
 			$sessiontype = $_SESSION['admin_type'];
 		
-			$sql = $conn->prepare('INSERT INTO item(i_deviceID, i_model, i_category, i_brand, i_description, i_type, item_rawstock, i_price)
+			$sql = $conn->prepare('INSERT INTO item(i_deviceID, i_model, i_category, i_brand, i_description, i_type, item_rawstock, i_price, i_status)
 												VALUES(?,?,?,?,?,?,?,?,?)');
-			$sql->execute(array($e_number, $e_model, $e_category, $e_brand, $e_description, $e_type, $e_stock, $e_price));
+			$sql->execute(array($e_number, $e_model, $e_category, $e_brand, $e_description, $e_type, $e_stock, $e_price,$e_status));
 			$row = $sql->rowCount();
 			$itemID = $conn->lastInsertId();
 		
@@ -473,7 +473,10 @@
 		$e_assigned = trim($_POST['e_assigned']);
 		$e_type = trim($_POST['e_type']);
 		$e_status = trim($_POST['e_status']);
-		$add_function->add_equipment($e_number,$e_model,$e_category,$e_brand,$e_description,$e_stock,$e_assigned,$e_type,$e_status);
+		$e_price = trim($_POST["e_price"]);
+		//$sql->execute(array($e_number, $e_model, $e_category, $e_brand, $e_description, $e_type, $e_stock, $e_price));
+
+		$add_function->add_equipment($e_number,$e_model,$e_category,$e_brand,$e_description,$e_type,$e_stock,$e_price);
 		break;
 
 		case 'add_member';
